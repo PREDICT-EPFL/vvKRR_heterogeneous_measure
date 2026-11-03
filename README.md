@@ -91,11 +91,3 @@ python vvRKHS_2d_partial.py
 | `vvRKHS_regression_gp.py` | Function-valued output learned from point evaluations | `1_input_RKHS_output_1.pdf` |
 
 Additional figures are available as commented-out calls at the bottom of each script.
-
-## Numerical notes
-
-- The small diagonal jitter added to Gram matrices sets the posterior variance at observed samples. It should be zero in theory but needs a small positive value in practice.
-- Regularising `T` and its integral version keeps identities such as `T T^{-1} = I` numerically valid.
-- With incomplete linear measurements of a finite-dimensional output, the kernel conditioned on the data becomes an identity minus a low-rank operator. Its norm therefore stays at one and does not decrease.
-- For a structured output space with `<f_1, f_2> = <c_1, K_T c_2>`, use the coordinates `z = K_T^{1/2} c`. In these coordinates the inner product is Euclidean.
-- With a separable kernel, an ill-conditioned output matrix can make the system unstable. Computing `<f_1, T^{-1} f_2>` involves both `B^{-1}` and `K_T`, which may both be ill-conditioned. A small regulariser does not help, and a large one pushes the matrix towards `I`, which limits the uncertainty reduction.
